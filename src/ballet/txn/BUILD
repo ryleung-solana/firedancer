@@ -31,6 +31,9 @@ fd_cc_test(
         "fixtures/transaction1.bin",
         "fixtures/transaction2.bin",
         "fixtures/transaction3.bin",
+        "fixtures/transaction4.bin",
+        "fixtures/transaction5.bin",
+        "fixtures/transaction6.bin",
     ],
     deps = ["//src/ballet"],
 )
