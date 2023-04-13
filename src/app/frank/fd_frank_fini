@@ -22,6 +22,11 @@ export FD_LOG_PATH
 $BUILD/bin/fd_wksp_ctl delete $WKSP
 rm -fv $CONF
 
+# Delete netns
+ip netns del fd-$APP-netless
+# Delete users
+userdel fd-$APP
+
 echo success
 exit 0
 

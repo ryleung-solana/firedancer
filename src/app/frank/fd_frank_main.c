@@ -5,6 +5,10 @@
 #include <stdio.h>
 #include <signal.h>
 
+#ifdef FD_HAS_SANDBOX
+#include "../../util/sandbox/fd_sandbox.h"
+#endif /* FD_HAS_SANDBOX */
+
 static fd_cnc_t * fd_frank_main_cnc = NULL;
 
 static void
@@ -114,6 +118,13 @@ main( int     argc,
     }
 
   } while(0);
+
+  #ifdef FD_HAS_SANDBOX
+  fd_sandbox_profile_t profile;
+  fd_sandbox_profile_init( &profile );
+
+  fd_sandbox(&profile);
+  #endif /* FD_HAS_SANDBOX */
 
   /* Boot all the tiles that main controls */
 

@@ -2,6 +2,10 @@
 
 #if FD_HAS_FRANK
 
+#ifdef FD_HAS_SANDBOX
+#include "../../util/sandbox/fd_sandbox.h"
+#endif /* FD_HAS_SANDBOX */
+
 /**********************************************************************/
 /* FIXME: These APIs are probably useful to move to a monitor lib */
 
@@ -355,6 +359,12 @@ main( int     argc,
   ulong **          tile_fseq   = fd_alloca( alignof(ulong *         ), sizeof(ulong *         )*tile_cnt );
   if( FD_UNLIKELY( (!tile_name) | (!tile_cnc) | (!tile_mcache) | (!tile_fseq) ) ) FD_LOG_ERR(( "fd_alloca failed" )); /* paranoia */
   
+  #ifdef FD_HAS_SANDBOX
+  fd_sandbox_profile_t profile;
+  fd_sandbox_profile_init( &profile );
+  fd_sandbox(&profile);
+  #endif /* FD_HAS_SANDBOX */
+
   do {
     ulong tile_idx = 0UL;
 

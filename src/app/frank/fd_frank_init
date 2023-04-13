@@ -1,17 +1,18 @@
 #!/bin/bash
 
-if [ $# -ne 4 ]; then
+if [ $# -ne 5 ]; then
   echo ""
-  echo "        Usage: $0 [APP_NAME] [APP_CORE_TARGET] [VERIFY_CNT] [BUILD]"
+  echo "        Usage: $0 [APP_NAME] [APP_CORE_TARGET] [INIT_SANDBOX] [VERIFY_CNT] [BUILD]"
   echo ""
   exit 1
 fi
 
 APP=$1
 AFFINITY=$2
-VERIFY_CNT=$3
-BUILD=$4
-shift 4
+INIT_SANDBOX=$3
+VERIFY_CNT=$4
+BUILD=$5
+shift 5
 
 #######################################################################
 
@@ -77,6 +78,14 @@ for((verify_idx=0;verify_idx<VERIFY_CNT;verify_idx++)); do
     insert $POD cstr $APP.verify.v$verify_idx.fseq   $FSEQ   \
     || exit $?
 done
+
+if [ $INIT_SANDBOX = "1" ];
+then
+  # Create the network namespace(s)
+  ip netns add fd-$APP-netless
+  # Create the thread group users
+  useradd -MN -s /sbin/nologin fd-$APP
+fi
 
 BASE_ARGS="--pod $POD --cfg $APP"
 RUN_ARGS="$BASE_ARGS --log-app $APP --log-thread main"
