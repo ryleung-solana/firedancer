@@ -523,7 +523,7 @@ main( int     argc,
 
   /* Setup TTY */
 
-  printf( TEXT_CUP_HOME );
+  // printf( TEXT_CUP_HOME );
 
   long stop = then + duration;
   for(;;) {
@@ -591,9 +591,9 @@ main( int     argc,
     /* Switch to alternate screen and erase junk below
        TODO ideally we'd have the last iteration on the main buffer and only the rest on ALTBUF */
 
-    printf( TEXT_ALTBUF_ENABLE
-            TEXT_ED
-            TEXT_CUP_HOME );
+    // printf( TEXT_ALTBUF_ENABLE
+    //         TEXT_ED
+    //         TEXT_CUP_HOME );
 
     /* Stop once we've been monitoring for duration ns */
 
