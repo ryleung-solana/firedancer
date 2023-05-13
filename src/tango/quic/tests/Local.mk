@@ -17,6 +17,7 @@ $(call make-unit-test,test_quic_tls_decrypt,test_tls_decrypt,fd_quic fd_ballet f
 $(call make-unit-test,test_quic_tls_pcap,test_tls_pcap,fd_quic fd_ballet fd_util)
 $(call make-unit-test,test_quic_tls_pcap2,test_tls_pcap2,fd_quic fd_ballet fd_util)
 $(call make-unit-test,test_quic_tls_both,test_tls_quic_both,fd_quic fd_util)
+$(call make-unit-test,test_quic_retry,test_quic_retry,fd_aio fd_quic fd_ballet fd_tango fd_util)
 
 $(call run-unit-test,test_quic_hs)
 $(call run-unit-test,test_quic_streams)
