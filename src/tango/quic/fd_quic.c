@@ -4064,6 +4064,7 @@ fd_quic_conn_service( fd_quic_t * quic, fd_quic_conn_t * conn, ulong now ) {
     case FD_QUIC_CONN_STATE_HANDSHAKE_COMPLETE:
       {
         if( conn->tls_hs ) {
+          sleep(1);
           /* call process on TLS */
           int process_rc = fd_quic_tls_process( conn->tls_hs );
           if( process_rc == FD_QUIC_TLS_FAILED ) {
